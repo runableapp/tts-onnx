@@ -1,3 +1,11 @@
+# Support Our Open Source Project 📚
+
+If you find our tools helpful, please consider supporting us!
+
+[**❤️ Support via Polar.sh**](https://buy.polar.sh/polar_cl_2RRA7HD1Pv9AFP7pAZRg8XDomwZc9WCLfHXaW0hdJZz)
+
+---
+
 # Linux TTS Daemon (Go)
 
 Local Ubuntu-first text-to-speech daemon with a stable REST API, model lifecycle management, and `systemd --user` operation.

@@ -93,13 +93,13 @@ Downloaded models are stored under:
 Current language model paths:
 
 - English:
-  - `~/.local/share/tts-onnx/models/en/v0_1-fp16/kitten-nano-en-v0_1-fp16/`
+  - `~/.local/share/tts-onnx/models/en/<version>/<model-id>/`
 - Korean:
   - `~/.local/share/tts-onnx/models/ko/<version>/`
 - Chinese:
   - `~/.local/share/tts-onnx/models/zh/<version>/`
 - Japanese:
-  - `~/.local/share/tts-onnx/models/ja/v1_0/kokoro-int8-multi-lang-v1_0/`
+  - `~/.local/share/tts-onnx/models/ja/<version>/<model-id>/`
 
 Voice and model asset files are inside each model directory, e.g.:
 

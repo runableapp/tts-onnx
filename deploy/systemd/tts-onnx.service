@@ -1,0 +1,21 @@
+[Unit]
+Description=TTS ONNX Local Service
+After=default.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=exec
+ExecStart=%h/.local/bin/tts --service --config %h/.config/tts-onnx/config.yaml
+Restart=on-failure
+RestartSec=2s
+TimeoutStartSec=30s
+TimeoutStopSec=15s
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/tts-onnx %h/.local/state/tts-onnx %h/.cache/tts-onnx %h/.config/tts-onnx
+
+[Install]
+WantedBy=default.target

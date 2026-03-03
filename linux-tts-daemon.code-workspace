@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../linux-tts-edge"
+		},
+		{
+			"path": "../linux-tts-piper"
+		}
+	],
+	"settings": {}
+}

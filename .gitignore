@@ -1,0 +1,6 @@
+.task/
+bin/
+dist/
+*.wav
+notes/
+.cursor/

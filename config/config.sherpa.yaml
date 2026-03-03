@@ -1,0 +1,15 @@
+service_name: tts
+listen_addr: 127.0.0.1:18741
+play_on_speak: true
+
+read_timeout: 15s
+write_timeout: 60s
+idle_timeout: 120s
+
+max_concurrent_requests: 2
+synth_timeout: 40s
+model_idle_unload: 10m
+max_text_chars: 1200
+max_payload_bytes: 1048576
+
+engine: sherpa-onnx

@@ -1,0 +1,42 @@
+name: Release Linux Artifact
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-upload:
+    name: Build Linux and upload to release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Setup Task
+        uses: arduino/setup-task@v2
+
+      - name: Build package
+        run: task release:package VERSION="${GITHUB_REF_NAME}"
+
+      - name: Create checksum
+        run: |
+          ASSET="dist/linux-tts-onnx_${GITHUB_REF_NAME}_linux_amd64.tar.gz"
+          sha256sum "${ASSET}" > "${ASSET}.sha256"
+
+      - name: Upload assets to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/linux-tts-onnx_${{ github.ref_name }}_linux_amd64.tar.gz
+            dist/linux-tts-onnx_${{ github.ref_name }}_linux_amd64.tar.gz.sha256
+          generate_release_notes: true

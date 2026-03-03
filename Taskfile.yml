@@ -1,0 +1,130 @@
+version: "3"
+
+vars:
+  BIN_DIR: ./bin
+  BUILD_BIN: ./bin/tts
+  HEALTH_URL: http://127.0.0.1:18741/v1/health
+  CONFIG_PATH: '{{default "./config/config.example.yaml" .CONFIG}}'
+  # netgo: use Go's pure-Go DNS resolver (instead of libc/cgo resolver).
+  # osusergo: use Go's pure-Go os/user lookup (avoids libc/NSS dependency).
+  BUILD_FLAGS: -tags "netgo osusergo" -ldflags '-s -w'
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list
+
+  dev:run:
+    desc: Run daemon locally with example config
+    platforms: [linux]
+    cmds:
+      - go run ./cmd/tts --service --config {{.CONFIG_PATH}}
+
+  dev:smoke:
+    desc: Run runtime check and health probe
+    platforms: [linux]
+    cmds:
+      - go run ./cmd/runtime-check
+      - curl -fsS {{.HEALTH_URL}} || (echo "health endpoint not reachable" && exit 1)
+
+  test:unit:
+    desc: Run unit tests
+    cmds:
+      - go test ./...
+
+  test:integration:
+    desc: Basic integration checks for API handlers
+    cmds:
+      - go test ./... -run Integration
+
+  test:load:
+    desc: Simple parallel speak load smoke
+    platforms: [linux]
+    cmds:
+      - |
+        for i in $(seq 1 10); do
+          curl -sS -X POST http://127.0.0.1:18741/v1/speak \
+            -H "content-type: application/json" \
+            -d "{\"text\":\"hello $i\",\"lang\":\"en\",\"format\":\"wav\"}" >/dev/null &
+        done
+        wait
+
+  model:list:
+    desc: List installed models
+    platforms: [linux]
+    cmds:
+      - curl -fsS http://127.0.0.1:18741/v1/models
+
+  model:install:
+    desc: Install model by language + model ID
+    platforms: [linux]
+    requires:
+      vars: [MODEL_LANG, MODEL_ID]
+    cmds:
+      - |
+        curl -fsS -X POST http://127.0.0.1:18741/v1/models/install \
+          -H "content-type: application/json" \
+          -d "{\"lang\":\"{{.MODEL_LANG}}\",\"model_id\":\"{{.MODEL_ID}}\"}"
+
+  service:install-user-unit:
+    desc: Install systemd --user unit file
+    platforms: [linux]
+    cmds:
+      - bash ./scripts/install-user-unit.sh
+    status:
+      - test -f "$HOME/.config/systemd/user/tts-onnx.service"
+
+  service:enable:
+    desc: Enable and start systemd --user service
+    platforms: [linux]
+    deps: [service:install-user-unit]
+    cmds:
+      - bash ./scripts/enable-user-service.sh
+
+  service:disable:
+    desc: Disable and stop systemd --user service
+    platforms: [linux]
+    cmds:
+      - bash ./scripts/disable-user-service.sh
+
+  service:logs:
+    desc: Tail service logs
+    platforms: [linux]
+    cmds:
+      - journalctl --user -u tts-onnx.service -f
+
+  service:health:
+    desc: Probe service health endpoint
+    platforms: [linux]
+    cmds:
+      - curl -fsS {{.HEALTH_URL}}
+
+  release:build:
+    desc: Build release binary (dynamic linking)
+    cmds:
+      - mkdir -p {{.BIN_DIR}}
+      - CGO_ENABLED=1 go build {{.BUILD_FLAGS}} -o {{.BUILD_BIN}} ./cmd/tts
+    sources:
+      - ./cmd/**/*.go
+      - ./internal/**/*.go
+    generates:
+      - '{{.BUILD_BIN}}'
+
+  release:package:
+    desc: Create tarball package with unit/config/assets
+    deps: [release:build]
+    requires:
+      vars: [VERSION]
+    cmds:
+      - mkdir -p dist
+      - tar czf dist/linux-tts-onnx_{{.VERSION}}_linux_amd64.tar.gz -C . bin config deploy scripts docs README.md MANUAL.md
+    status:
+      - test -f dist/linux-tts-onnx_{{.VERSION}}_linux_amd64.tar.gz
+
+  release:verify:
+    desc: Verify packaged artifact checksum
+    requires:
+      vars: [VERSION]
+    cmds:
+      - sha256sum dist/linux-tts-onnx_{{.VERSION}}_linux_amd64.tar.gz

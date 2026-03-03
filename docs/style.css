@@ -83,6 +83,13 @@ body {
   box-shadow: 0 16px 34px rgba(15, 23, 42, 0.22);
 }
 
+.hero-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .hero h1 {
   margin: 0;
   line-height: 1.15;
@@ -90,12 +97,13 @@ body {
 }
 
 .hero h1 .sub {
-  display: block;
-  margin-top: 4px;
-  font-size: 0.56em;
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.48em;
   font-weight: 500;
   color: #bfdbfe;
   letter-spacing: 0.2px;
+  vertical-align: middle;
 }
 
 .hero p {
@@ -108,6 +116,31 @@ body {
   margin: 14px 0 8px;
   color: #ffffff;
   font-size: 1.3rem;
+}
+
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(2, 6, 23, 0.35);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.github-btn:hover {
+  background: rgba(2, 6, 23, 0.55);
+}
+
+.github-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .pill {

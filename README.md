@@ -6,7 +6,7 @@ Local Ubuntu-first text-to-speech daemon with a stable REST API, model lifecycle
 
 - Default engine is `mock` for local development and API validation.
 - Real `sherpa-onnx` Go runtime is integrated; use `config/config.sherpa.yaml` to run with native inference.
-- EN/KO/JA runtime uses installed models from local manifest plus remote list from sherpa release.
+- KO/ZH/JA/EN runtime uses installed models from local manifest plus remote list from sherpa release.
 
 ## System Dependencies
 
@@ -49,12 +49,14 @@ sudo apt install -y libc6 libstdc++6 libgcc-s1 ca-certificates alsa-utils golang
 
 Pinned model artifact URLs used in this repo:
 
-- English (Kitten):
-  - https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kitten-nano-en-v0_1-fp16.tar.bz2
 - Korean (Mimic3 VITS):
   - https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-mimic3-ko_KO-kss_low.tar.bz2
-- Japanese (Kokoro multi-lang):
-  - https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-multi-lang-v1_0.tar.bz2
+- Chinese (Piper):
+  - https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-zh_CN-huayan-medium.tar.bz2
+- Japanese (Kokoro int8 multi-lang):
+  - https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-multi-lang-v1_0.tar.bz2
+- English (Kitten):
+  - https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kitten-nano-en-v0_1-fp16.tar.bz2
 
 ## Sherpa Runtime `.so` Location
 
@@ -86,8 +88,10 @@ Current language model paths:
   - `~/.local/share/tts-onnx/models/en/v0_1-fp16/kitten-nano-en-v0_1-fp16/`
 - Korean:
   - `~/.local/share/tts-onnx/models/ko/<version>/`
+- Chinese:
+  - `~/.local/share/tts-onnx/models/zh/<version>/`
 - Japanese:
-  - `~/.local/share/tts-onnx/models/ja/v1_0/kokoro-multi-lang-v1_0/`
+  - `~/.local/share/tts-onnx/models/ja/v1_0/kokoro-int8-multi-lang-v1_0/`
 
 Voice and model asset files are inside each model directory, e.g.:
 
@@ -170,7 +174,8 @@ Base URL: `http://127.0.0.1:18741/v1`
 Auth behavior (`internal/httpapi/server.go`):
 
 - If `bearer_token` is empty, no auth is required.
-- If `bearer_token` is set, all `/v1/*` endpoints except `/v1/health` require `Authorization: Bearer <token>`.
+- If `bearer_token` is set, `/v1/models`, `/v1/models/install`, `/v1/models/{lang}/{version}`, `/v1/speak`, `/v1/stop`, and `/v1/metrics` require `Authorization: Bearer <token>`.
+- `/v1/health`, `/v1/capabilities`, and `/` remain accessible without auth.
 
 Endpoints:
 
@@ -186,7 +191,7 @@ Endpoints:
 
 Common request fields:
 
-- `/v1/models/install`: `lang`, `model_id`, `url`, `checksum`, `version`
+- `/v1/models/install`: `lang` (required), `url` (required), `model_id`, `checksum`, `version`
 - `/v1/speak`: `text`, `lang` (optional), `voice`, `rate`, `format`, `sample_rate`, `request_id`
 - `/v1/stop`: `request_id`
 
@@ -199,7 +204,7 @@ Common request fields:
 ## Multi-Language Long Sentence Test
 
 - `bash ./test.sh`
-- Outputs: `./tmp-audio-tests/english.wav`, `korean.wav`, `japanese.wav`
+- Current behavior: downloads KO/ZH/JA/EN test models and plays samples through speaker (`aplay`) without writing WAV files.
 
 ## Taskfile Workflows
 
@@ -222,4 +227,4 @@ Common request fields:
 
 ## Docs
 
-- Full API reference: `docs/API_FULL.md`
+- Full API reference: `API_FULL.md`

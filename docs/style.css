@@ -1,0 +1,232 @@
+:root {
+  --bg: #f4f7fb;
+  --panel: #ffffff;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #dbe3ee;
+  --brand: #2563eb;
+  --brand-soft: #dbeafe;
+  --accent: #16a34a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 0%, #dbeafe 0%, transparent 35%),
+    radial-gradient(circle at 90% 15%, #dcfce7 0%, transparent 28%),
+    var(--bg);
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 26px 16px 64px;
+}
+
+.polar-support {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+  background: #111827;
+  color: #f9fafb;
+  text-decoration: none;
+  border: 1px solid #1f2937;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+}
+
+.polar-support:hover {
+  background: #1f2937;
+}
+
+.lang-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.lang-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.lang-link.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+.hero {
+  background: linear-gradient(140deg, #0f172a 0%, #1d4ed8 58%, #0ea5e9 100%);
+  color: #fff;
+  padding: 28px 24px;
+  border-radius: 18px;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.22);
+}
+
+.hero h1 {
+  margin: 0;
+  line-height: 1.15;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.hero h1 .sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.56em;
+  font-weight: 500;
+  color: #bfdbfe;
+  letter-spacing: 0.2px;
+}
+
+.hero p {
+  margin: 10px 0 0;
+  color: #e2e8f0;
+  font-size: 1.02rem;
+}
+
+.hero h2 {
+  margin: 14px 0 8px;
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.pill {
+  display: inline-block;
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #f8fafc;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.section {
+  margin-top: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 18px 14px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+h2, h3 { line-height: 1.25; }
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+}
+
+h3 {
+  margin: 14px 0 8px;
+  color: #1d4ed8;
+  font-size: 1.02rem;
+}
+
+p { margin: 10px 0; }
+
+ul { padding-left: 20px; margin: 8px 0 10px; }
+
+li { margin: 4px 0; }
+
+a {
+  color: #1d4ed8;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
+
+pre {
+  background: #0b1220;
+  color: #dbeafe;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 8px 0 10px;
+  overflow-x: auto;
+}
+
+code { font-family: "Courier New", Courier, monospace; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.mini-card {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.mini-card h4 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.note {
+  background: var(--brand-soft);
+  border-left: 4px solid var(--brand);
+  padding: 10px 12px;
+  margin: 10px 0 4px;
+  border-radius: 8px;
+  color: #0f172a;
+}
+
+.license-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.big-line {
+  margin: 32px 0 10px;
+  border: 0;
+  height: 9px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #0f172a 0%, #1d4ed8 50%, #16a34a 100%);
+}
+
+.footer-image {
+  width: 150px;
+  display: block;
+  margin: 8px auto 8px;
+  border-radius: 12px;
+  border: 0;
+  box-shadow: none;
+}
+
+.footer-copy {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.footer-copy a {
+  text-decoration: none;
+}

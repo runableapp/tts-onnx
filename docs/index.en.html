@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TTS ONNX</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
+</head>
+<body>
+  <a class="polar-support" href="https://buy.polar.sh/polar_cl_2RRA7HD1Pv9AFP7pAZRg8XDomwZc9WCLfHXaW0hdJZz" data-polar-checkout data-polar-checkout-theme="dark">Support Open Source Projects!</a>
+  <main class="container">
+    <nav class="lang-switch" aria-label="Language switch">
+      <a class="lang-link" href="./index.html">🇰🇷 한글</a>
+      <a class="lang-link" href="./index.zh.html">🇨🇳 中文</a>
+      <a class="lang-link" href="./index.ja.html">🇯🇵 日本語</a>
+      <a class="lang-link active" href="./index.en.html" aria-current="page">🇺🇸 English</a>
+    </nav>
+
+    <section class="hero">
+      <h1>TTS ONNX <span class="sub">(Sherpa ONNX)</span></h1>
+      <h2>Why</h2>
+      <p>Because high-quality offline text-to-speech options for Korean, Chinese, and Japanese are still limited.</p>
+      <span class="pill">Local | Fast | Korean | Chinese | Japanese | English</span>
+    </section>
+
+    <section class="section">
+      <h2>What It Is</h2>
+      <p>
+        <strong>TTS ONNX</strong> is a Linux-first text-to-speech runtime based on Sherpa-ONNX.
+        It supports local/offline synthesis, multilingual voice workflows, direct CLI usage, and HTTP service mode.
+      </p>
+      <p>
+        <strong>Sherpa-ONNX</strong> is an open-source speech toolkit from the k2-fsa project. It uses ONNX Runtime
+        for local inference and provides building blocks for speech tasks such as text-to-speech, speech recognition,
+        and related multilingual voice workflows across platforms.
+      </p>
+      <div class="grid">
+        <div class="mini-card">
+          <h4>Offline by design</h4>
+          <p>Generate speech locally without requiring cloud inference.</p>
+        </div>
+        <div class="mini-card">
+          <h4>Model lifecycle tools</h4>
+          <p>Install, list, and manage KO/ZH/JA/EN model packages.</p>
+        </div>
+        <div class="mini-card">
+          <h4>Two runtime styles</h4>
+          <p>Use one binary for command-line synthesis or service APIs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Sherpa-ONNX Project URLs</h2>
+      <ul>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/index.html" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS Docs</a></li>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/index.html" target="_blank" rel="noopener noreferrer">Pretrained TTS Models</a></li>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/" target="_blank" rel="noopener noreferrer">Full TTS Catalog</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS Release Models</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx-go" target="_blank" rel="noopener noreferrer">Sherpa-ONNX Go Bindings</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx" target="_blank" rel="noopener noreferrer">Sherpa-ONNX GitHub</a></li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Model URLs (Known Good)</h2>
+      <ul>
+        <li>Korean (Mimic3 VITS): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-mimic3-ko_KO-kss_low.tar.bz2" target="_blank" rel="noopener noreferrer">vits-mimic3-ko_KO-kss_low.tar.bz2</a></li>
+        <li>Chinese (Piper): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-zh_CN-huayan-medium.tar.bz2" target="_blank" rel="noopener noreferrer">vits-piper-zh_CN-huayan-medium.tar.bz2</a></li>
+        <li>Japanese + Multi-lang (Kokoro Int8): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-multi-lang-v1_0.tar.bz2" target="_blank" rel="noopener noreferrer">kokoro-int8-multi-lang-v1_0.tar.bz2</a></li>
+        <li>English (Kitten): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kitten-nano-en-v0_1-fp16.tar.bz2" target="_blank" rel="noopener noreferrer">kitten-nano-en-v0_1-fp16.tar.bz2</a></li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>How To Use It In CLI</h2>
+      <h3>Install models</h3>
+      <pre><code>./bin/tts --install-remote-id vits-mimic3-ko_KO-kss_low
+./bin/tts --lang zh --install-remote-id vits-piper-zh_CN-huayan-medium
+./bin/tts --lang ja --install-remote-id kokoro-int8-multi-lang-v1_0
+./bin/tts --install-remote-id kitten-nano-en-v0_1-fp16</code></pre>
+
+      <h3>Check available voices</h3>
+      <pre><code>./bin/tts --voice-list
+./bin/tts --voice-list --lang ko
+./bin/tts --voice-list --lang zh
+./bin/tts --voice-list --lang ja
+./bin/tts --voice-list --lang en</code></pre>
+
+      <h3>Synthesize speech</h3>
+      <pre><code>./bin/tts --lang ko "안녕하세요. 오프라인 테스트입니다."
+./bin/tts --lang zh "这是中文语音合成测试。"
+./bin/tts --lang ja "こんにちは。オフラインテストです。"
+./bin/tts --lang en "Hello, this is an offline test."</code></pre>
+
+      <h3>Save to a WAV file</h3>
+      <pre><code>./bin/tts --out ./out.wav "save this audio"</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>How To Use It As A Service</h2>
+      <h3>Start service directly</h3>
+      <pre><code>./bin/tts --service --config ./config/config.sherpa.yaml</code></pre>
+
+      <h3>Install user service (systemd --user)</h3>
+      <pre><code>bash ./scripts/install-user-unit.sh
+bash ./scripts/enable-user-service.sh</code></pre>
+
+      <h3>Service health check</h3>
+      <pre><code>curl -fsS http://127.0.0.1:18741/v1/health</code></pre>
+
+      <h3>Speak via API</h3>
+      <pre><code>curl -X POST http://127.0.0.1:18741/v1/speak \
+  -H 'content-type: application/json' \
+  -d '{"text":"hello world","lang":"en","format":"wav"}' \
+  --output out.wav</code></pre>
+
+      <h3>List installed models via API</h3>
+      <pre><code>curl -fsS http://127.0.0.1:18741/v1/models</code></pre>
+
+      <div class="note">
+        Base service URL: <code>http://127.0.0.1:18741/v1</code><br>
+        Key endpoints: <code>/health</code>, <code>/models</code>, <code>/models/install</code>, <code>/speak</code>, <code>/stop</code>, <code>/metrics</code>.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>License</h2>
+      <div class="license-box">
+        This project is licensed under the
+        <strong>GNU General Public License v3.0 (GPL-3.0)</strong>.
+        See <code>LICENSE.txt</code> in this repository for the full license text.
+      </div>
+    </section>
+
+    <hr class="big-line">
+    <center>
+      <img class="footer-image" src="./runable-dad-frame-small.webp" alt="runable dad image">
+      <div class="footer-copy">&copy; <span id="copyright-year">2026</span> <a href="https://runable.app" target="_blank" rel="noopener noreferrer">Runable.app</a> - Licensed under GPL v3</div>
+    </center>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.1/dist/embed.global.js" defer data-auto-init></script>
+</body>
+</html>

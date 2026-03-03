@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TTS ONNX</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
+</head>
+<body>
+  <a class="polar-support" href="https://buy.polar.sh/polar_cl_2RRA7HD1Pv9AFP7pAZRg8XDomwZc9WCLfHXaW0hdJZz" data-polar-checkout data-polar-checkout-theme="dark">オープンソースを支援する</a>
+  <main class="container">
+    <nav class="lang-switch" aria-label="言語切替">
+      <a class="lang-link" href="./index.html">🇰🇷 한글</a>
+      <a class="lang-link" href="./index.zh.html">🇨🇳 中文</a>
+      <a class="lang-link active" href="./index.ja.html" aria-current="page">🇯🇵 日本語</a>
+      <a class="lang-link" href="./index.en.html">🇺🇸 English</a>
+    </nav>
+
+    <section class="hero">
+      <h1>TTS ONNX <span class="sub">(Sherpa ONNX)</span></h1>
+      <h2>Why</h2>
+      <p>高品質な韓国語・中国語・日本語のオフライン TTS の選択肢が、まだ十分ではないためです。</p>
+      <span class="pill">ローカル | 高速 | 韓国語 | 中国語 | 日本語 | 英語</span>
+    </section>
+
+    <section class="section">
+      <h2>概要</h2>
+      <p>
+        <strong>TTS ONNX</strong> は Sherpa-ONNX を基盤とした Linux 優先のテキスト読み上げランタイムです。
+        オフライン音声合成、多言語ボイス運用、CLI 利用、HTTP サービスモードをサポートします。
+      </p>
+      <p>
+        <strong>Sherpa-ONNX</strong> は k2-fsa プロジェクトのオープンソース音声ツールキットです。
+        ONNX Runtime を使ってローカル推論を行い、音声合成や音声認識などの機能を構成する部品を提供します。
+      </p>
+      <div class="grid">
+        <div class="mini-card">
+          <h4>オフライン重視</h4>
+          <p>クラウド推論なしでローカルに音声を生成します。</p>
+        </div>
+        <div class="mini-card">
+          <h4>モデル管理</h4>
+          <p>KO/ZH/JA/EN モデルの導入・一覧・管理を行えます。</p>
+        </div>
+        <div class="mini-card">
+          <h4>2つの実行モード</h4>
+          <p>1つのバイナリで CLI とサービス API の両方を利用できます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Sherpa-ONNX プロジェクト URL</h2>
+      <ul>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/index.html" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS ドキュメント</a></li>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/index.html" target="_blank" rel="noopener noreferrer">事前学習済み TTS モデル</a></li>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/" target="_blank" rel="noopener noreferrer">TTS カタログ</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS リリースモデル</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx-go" target="_blank" rel="noopener noreferrer">Sherpa-ONNX Go バインディング</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx" target="_blank" rel="noopener noreferrer">Sherpa-ONNX GitHub</a></li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>モデル URL（推奨）</h2>
+      <ul>
+        <li>韓国語 (Mimic3 VITS): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-mimic3-ko_KO-kss_low.tar.bz2" target="_blank" rel="noopener noreferrer">vits-mimic3-ko_KO-kss_low.tar.bz2</a></li>
+        <li>中国語 (Piper): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-zh_CN-huayan-medium.tar.bz2" target="_blank" rel="noopener noreferrer">vits-piper-zh_CN-huayan-medium.tar.bz2</a></li>
+        <li>日本語/多言語 (Kokoro Int8): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-multi-lang-v1_0.tar.bz2" target="_blank" rel="noopener noreferrer">kokoro-int8-multi-lang-v1_0.tar.bz2</a></li>
+        <li>英語 (Kitten): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kitten-nano-en-v0_1-fp16.tar.bz2" target="_blank" rel="noopener noreferrer">kitten-nano-en-v0_1-fp16.tar.bz2</a></li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>CLI の使い方</h2>
+      <h3>モデルのインストール</h3>
+      <pre><code>./bin/tts --install-remote-id vits-mimic3-ko_KO-kss_low
+./bin/tts --lang zh --install-remote-id vits-piper-zh_CN-huayan-medium
+./bin/tts --lang ja --install-remote-id kokoro-int8-multi-lang-v1_0
+./bin/tts --install-remote-id kitten-nano-en-v0_1-fp16</code></pre>
+
+      <h3>利用可能なボイス一覧</h3>
+      <pre><code>./bin/tts --voice-list
+./bin/tts --voice-list --lang ko
+./bin/tts --voice-list --lang zh
+./bin/tts --voice-list --lang ja
+./bin/tts --voice-list --lang en</code></pre>
+
+      <h3>音声合成</h3>
+      <pre><code>./bin/tts --lang ko "안녕하세요. 오프라인 테스트입니다."
+./bin/tts --lang zh "这是中文语音合成测试。"
+./bin/tts --lang ja "こんにちは。オフラインテストです。"
+./bin/tts --lang en "Hello, this is an offline test."</code></pre>
+
+      <h3>WAV ファイルに保存</h3>
+      <pre><code>./bin/tts --out ./out.wav "save this audio"</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>サービスとして使う</h2>
+      <h3>サービスを直接起動</h3>
+      <pre><code>./bin/tts --service --config ./config/config.sherpa.yaml</code></pre>
+
+      <h3>ユーザーサービスを導入 (systemd --user)</h3>
+      <pre><code>bash ./scripts/install-user-unit.sh
+bash ./scripts/enable-user-service.sh</code></pre>
+
+      <h3>ヘルスチェック</h3>
+      <pre><code>curl -fsS http://127.0.0.1:18741/v1/health</code></pre>
+
+      <h3>API で読み上げ</h3>
+      <pre><code>curl -X POST http://127.0.0.1:18741/v1/speak \
+  -H 'content-type: application/json' \
+  -d '{"text":"hello world","lang":"en","format":"wav"}' \
+  --output out.wav</code></pre>
+
+      <h3>API でインストール済みモデル確認</h3>
+      <pre><code>curl -fsS http://127.0.0.1:18741/v1/models</code></pre>
+
+      <div class="note">
+        サービスベース URL: <code>http://127.0.0.1:18741/v1</code><br>
+        主なエンドポイント: <code>/health</code>, <code>/models</code>, <code>/models/install</code>, <code>/speak</code>, <code>/stop</code>, <code>/metrics</code>.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>ライセンス</h2>
+      <div class="license-box">
+        本プロジェクトは
+        <strong>GNU General Public License v3.0 (GPL-3.0)</strong>
+        の下で公開されています。詳細は <code>LICENSE.txt</code> を参照してください。
+      </div>
+    </section>
+
+    <hr class="big-line">
+    <center>
+      <img class="footer-image" src="./runable-dad-frame-small.webp" alt="runable dad image">
+      <div class="footer-copy">&copy; <span id="copyright-year">2026</span> <a href="https://runable.app" target="_blank" rel="noopener noreferrer">Runable.app</a> - GPL v3 ライセンス</div>
+    </center>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.1/dist/embed.global.js" defer data-auto-init></script>
+</body>
+</html>

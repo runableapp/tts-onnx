@@ -1,286 +1,144 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TTS ONNX</title>
-  <style>
-    :root {
-      --bg: #f4f7fb;
-      --panel: #ffffff;
-      --ink: #0f172a;
-      --muted: #475569;
-      --line: #dbe3ee;
-      --brand: #2563eb;
-      --brand-soft: #dbeafe;
-      --accent: #16a34a;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 10% 0%, #dbeafe 0%, transparent 35%),
-        radial-gradient(circle at 90% 15%, #dcfce7 0%, transparent 28%),
-        var(--bg);
-    }
-    .container {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 26px 16px 64px;
-    }
-    .hero {
-      background: linear-gradient(140deg, #0f172a 0%, #1d4ed8 58%, #0ea5e9 100%);
-      color: #fff;
-      padding: 28px 24px;
-      border-radius: 18px;
-      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.22);
-    }
-    .hero h1 {
-      margin: 0;
-      line-height: 1.15;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-    }
-    .hero h1 .sub {
-      display: block;
-      margin-top: 4px;
-      font-size: 0.56em;
-      font-weight: 500;
-      color: #bfdbfe;
-      letter-spacing: 0.2px;
-    }
-    .hero p {
-      margin: 10px 0 0;
-      color: #e2e8f0;
-      font-size: 1.02rem;
-    }
-    .hero h2 {
-      margin: 14px 0 8px;
-      color: #ffffff;
-      font-size: 1.3rem;
-    }
-    .pill {
-      display: inline-block;
-      margin-top: 14px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      color: #f8fafc;
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    .section {
-      margin-top: 18px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 18px 18px 14px;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-    }
-    h2, h3 { line-height: 1.25; }
-    h2 {
-      margin: 0 0 10px;
-      font-size: 1.3rem;
-    }
-    h3 {
-      margin: 14px 0 8px;
-      color: #1d4ed8;
-      font-size: 1.02rem;
-    }
-    p { margin: 10px 0; }
-    ul { padding-left: 20px; margin: 8px 0 10px; }
-    li { margin: 4px 0; }
-    a {
-      color: #1d4ed8;
-      text-decoration-thickness: 1.5px;
-      text-underline-offset: 2px;
-    }
-    pre {
-      background: #0b1220;
-      color: #dbeafe;
-      border: 1px solid #1e293b;
-      border-radius: 10px;
-      padding: 12px;
-      margin: 8px 0 10px;
-      overflow-x: auto;
-    }
-    code { font-family: "Courier New", Courier, monospace; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-    }
-    .mini-card {
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 10px 12px;
-    }
-    .mini-card h4 {
-      margin: 0 0 6px;
-      font-size: 0.95rem;
-      color: #0f172a;
-    }
-    .note {
-      background: var(--brand-soft);
-      border-left: 4px solid var(--brand);
-      padding: 10px 12px;
-      margin: 10px 0 4px;
-      border-radius: 8px;
-      color: #0f172a;
-    }
-    .license-box {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 10px;
-      padding: 12px;
-    }
-    .big-line {
-      margin: 32px 0 10px;
-      border: 0;
-      height: 9px;
-      border-radius: 99px;
-      background: linear-gradient(90deg, #0f172a 0%, #1d4ed8 50%, #16a34a 100%);
-    }
-    .footer-image {
-      width: 150px;
-      display: block;
-      margin: 8px auto 8px;
-      border-radius: 12px;
-      border: 0;
-      box-shadow: none;
-    }
-    .footer-copy {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./script.js"></script>
 </head>
 <body>
+  <a class="polar-support" href="https://buy.polar.sh/polar_cl_2RRA7HD1Pv9AFP7pAZRg8XDomwZc9WCLfHXaW0hdJZz" data-polar-checkout data-polar-checkout-theme="dark">오픈소스 프로젝트 후원하기</a>
   <main class="container">
+    <nav class="lang-switch" aria-label="언어 전환">
+      <a class="lang-link active" href="./index.html" aria-current="page">🇰🇷 한글</a>
+      <a class="lang-link" href="./index.zh.html">🇨🇳 中文</a>
+      <a class="lang-link" href="./index.ja.html">🇯🇵 日本語</a>
+      <a class="lang-link" href="./index.en.html">🇺🇸 English</a>
+    </nav>
+
     <section class="hero">
       <h1>TTS ONNX <span class="sub">(Sherpa ONNX)</span></h1>
-      <h2>Why</h2>
-      <p>Because high-quality offline text-to-speech options for Korean, Chinese, and Japanese are still limited.</p>
-      <span class="pill">Local | Fast | CJK + English</span>
+      <h2>왜 만들었나요</h2>
+      <p>한국어, 중국어, 일본어에 대해 품질이 좋은 오프라인 TTS 선택지가 아직 충분하지 않기 때문입니다.</p>
+      <span class="pill">로컬 | 빠름 | 한국어 | 중국어 | 일본어 | 영어</span>
     </section>
 
     <section class="section">
-      <h2>What It Is</h2>
+      <h2>무엇인가요</h2>
       <p>
-        <strong>TTS ONNX</strong> is a Linux-first text-to-speech runtime based on Sherpa-ONNX.
-        It supports local/offline synthesis, multilingual voice workflows, direct CLI usage, and HTTP service mode.
+        <strong>TTS ONNX</strong>는 Sherpa-ONNX 기반의 Linux 우선 텍스트 음성 변환 런타임입니다.
+        오프라인 음성 합성, 다국어 보이스 워크플로, CLI 사용, HTTP 서비스 모드를 지원합니다.
       </p>
       <p>
-        <strong>Sherpa-ONNX</strong> is an open-source speech toolkit from the k2-fsa project. It uses ONNX Runtime
-        for local inference and provides building blocks for speech tasks such as text-to-speech, speech recognition,
-        and related multilingual voice workflows across platforms.
+        <strong>Sherpa-ONNX</strong>는 k2-fsa 프로젝트의 오픈소스 음성 툴킷입니다.
+        ONNX Runtime을 사용해 로컬 추론을 수행하며, TTS와 음성 인식 같은 기능을 위한 구성 요소를 제공합니다.
       </p>
       <div class="grid">
         <div class="mini-card">
-          <h4>Offline by design</h4>
-          <p>Generate speech locally without requiring cloud inference.</p>
+          <h4>오프라인 중심</h4>
+          <p>클라우드 의존 없이 로컬에서 음성을 생성합니다.</p>
         </div>
         <div class="mini-card">
-          <h4>Model lifecycle tools</h4>
-          <p>Install, list, and manage EN/KO/JA model packages.</p>
+          <h4>모델 관리</h4>
+          <p>KO/ZH/JA/EN 모델 설치, 조회, 관리를 지원합니다.</p>
         </div>
         <div class="mini-card">
-          <h4>Two runtime styles</h4>
-          <p>Use one binary for command-line synthesis or service APIs.</p>
+          <h4>두 가지 실행 방식</h4>
+          <p>하나의 바이너리로 CLI와 서비스 API를 모두 사용할 수 있습니다.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>Sherpa-ONNX Project URLs</h2>
+      <h2>Sherpa-ONNX 프로젝트 URL</h2>
       <ul>
-        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/index.html" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS Docs</a></li>
-        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/index.html" target="_blank" rel="noopener noreferrer">Pretrained TTS Models</a></li>
-        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/" target="_blank" rel="noopener noreferrer">Full TTS Catalog</a></li>
-        <li><a href="https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS Release Models</a></li>
-        <li><a href="https://github.com/k2-fsa/sherpa-onnx-go" target="_blank" rel="noopener noreferrer">Sherpa-ONNX Go Bindings</a></li>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/index.html" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS 문서</a></li>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/index.html" target="_blank" rel="noopener noreferrer">사전학습 TTS 모델</a></li>
+        <li><a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/" target="_blank" rel="noopener noreferrer">전체 TTS 카탈로그</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models" target="_blank" rel="noopener noreferrer">Sherpa-ONNX TTS 릴리즈 모델</a></li>
+        <li><a href="https://github.com/k2-fsa/sherpa-onnx-go" target="_blank" rel="noopener noreferrer">Sherpa-ONNX Go 바인딩</a></li>
         <li><a href="https://github.com/k2-fsa/sherpa-onnx" target="_blank" rel="noopener noreferrer">Sherpa-ONNX GitHub</a></li>
       </ul>
     </section>
 
     <section class="section">
-      <h2>Model URLs (Known Good)</h2>
+      <h2>모델 URL (권장)</h2>
       <ul>
-        <li>English (Kitten): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kitten-nano-en-v0_1-fp16.tar.bz2" target="_blank" rel="noopener noreferrer">kitten-nano-en-v0_1-fp16.tar.bz2</a></li>
-        <li>Korean (Mimic3 VITS): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-mimic3-ko_KO-kss_low.tar.bz2" target="_blank" rel="noopener noreferrer">vits-mimic3-ko_KO-kss_low.tar.bz2</a></li>
-        <li>Japanese + Multi-lang (Kokoro): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-multi-lang-v1_0.tar.bz2" target="_blank" rel="noopener noreferrer">kokoro-multi-lang-v1_0.tar.bz2</a></li>
+        <li>한국어 (Mimic3 VITS): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-mimic3-ko_KO-kss_low.tar.bz2" target="_blank" rel="noopener noreferrer">vits-mimic3-ko_KO-kss_low.tar.bz2</a></li>
+        <li>중국어 (Piper): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-zh_CN-huayan-medium.tar.bz2" target="_blank" rel="noopener noreferrer">vits-piper-zh_CN-huayan-medium.tar.bz2</a></li>
+        <li>일본어/멀티랭 (Kokoro Int8): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-multi-lang-v1_0.tar.bz2" target="_blank" rel="noopener noreferrer">kokoro-int8-multi-lang-v1_0.tar.bz2</a></li>
+        <li>영어 (Kitten): <a href="https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kitten-nano-en-v0_1-fp16.tar.bz2" target="_blank" rel="noopener noreferrer">kitten-nano-en-v0_1-fp16.tar.bz2</a></li>
       </ul>
     </section>
 
     <section class="section">
-      <h2>How To Use It In CLI</h2>
-      <h3>Install models</h3>
-      <pre><code>./bin/tts --install-remote-id kitten-nano-en-v0_1-fp16
-./bin/tts --install-remote-id vits-mimic3-ko_KO-kss_low
-./bin/tts --lang ja --install-remote-id kokoro-multi-lang-v1_0</code></pre>
+      <h2>CLI 사용 방법</h2>
+      <h3>모델 설치</h3>
+      <pre><code>./bin/tts --install-remote-id vits-mimic3-ko_KO-kss_low
+./bin/tts --lang zh --install-remote-id vits-piper-zh_CN-huayan-medium
+./bin/tts --lang ja --install-remote-id kokoro-int8-multi-lang-v1_0
+./bin/tts --install-remote-id kitten-nano-en-v0_1-fp16</code></pre>
 
-      <h3>Check available voices</h3>
+      <h3>보이스 목록 확인</h3>
       <pre><code>./bin/tts --voice-list
-./bin/tts --voice-list --lang en
 ./bin/tts --voice-list --lang ko
-./bin/tts --voice-list --lang ja</code></pre>
+./bin/tts --voice-list --lang zh
+./bin/tts --voice-list --lang ja
+./bin/tts --voice-list --lang en</code></pre>
 
-      <h3>Synthesize speech</h3>
-      <pre><code>./bin/tts "Hello, this is an offline test."
-./bin/tts --lang ko "안녕하세요. 오프라인 테스트입니다."
-./bin/tts --lang ja "こんにちは。オフラインテストです。"</code></pre>
+      <h3>음성 합성</h3>
+      <pre><code>./bin/tts --lang ko "안녕하세요. 오프라인 테스트입니다."
+./bin/tts --lang zh "这是中文语音合成测试。"
+./bin/tts --lang ja "こんにちは。オフラインテストです。"
+./bin/tts --lang en "Hello, this is an offline test."</code></pre>
 
-      <h3>Save to a WAV file</h3>
+      <h3>WAV 파일로 저장</h3>
       <pre><code>./bin/tts --out ./out.wav "save this audio"</code></pre>
     </section>
 
     <section class="section">
-      <h2>How To Use It As A Service</h2>
-      <h3>Start service directly</h3>
+      <h2>서비스 모드 사용 방법</h2>
+      <h3>서비스 직접 실행</h3>
       <pre><code>./bin/tts --service --config ./config/config.sherpa.yaml</code></pre>
 
-      <h3>Install user service (systemd --user)</h3>
+      <h3>사용자 서비스 설치 (systemd --user)</h3>
       <pre><code>bash ./scripts/install-user-unit.sh
 bash ./scripts/enable-user-service.sh</code></pre>
 
-      <h3>Service health check</h3>
+      <h3>서비스 상태 확인</h3>
       <pre><code>curl -fsS http://127.0.0.1:18741/v1/health</code></pre>
 
-      <h3>Speak via API</h3>
+      <h3>API로 음성 합성</h3>
       <pre><code>curl -X POST http://127.0.0.1:18741/v1/speak \
   -H 'content-type: application/json' \
   -d '{"text":"hello world","lang":"en","format":"wav"}' \
   --output out.wav</code></pre>
 
-      <h3>List installed models via API</h3>
+      <h3>설치된 모델 조회 (API)</h3>
       <pre><code>curl -fsS http://127.0.0.1:18741/v1/models</code></pre>
 
       <div class="note">
-        Base service URL: <code>http://127.0.0.1:18741/v1</code><br>
-        Key endpoints: <code>/health</code>, <code>/models</code>, <code>/models/install</code>, <code>/speak</code>, <code>/stop</code>, <code>/metrics</code>.
+        기본 서비스 URL: <code>http://127.0.0.1:18741/v1</code><br>
+        주요 엔드포인트: <code>/health</code>, <code>/models</code>, <code>/models/install</code>, <code>/speak</code>, <code>/stop</code>, <code>/metrics</code>.
       </div>
     </section>
 
     <section class="section">
-      <h2>License</h2>
+      <h2>라이선스</h2>
       <div class="license-box">
-        This project is licensed under the
-        <strong>GNU General Public License v3.0 (GPL-3.0)</strong>.
-        See <code>LICENSE.txt</code> in this repository for the full license text.
+        이 프로젝트는
+        <strong>GNU General Public License v3.0 (GPL-3.0)</strong>
+        라이선스를 따릅니다. 자세한 내용은 저장소의 <code>LICENSE.txt</code>를 참고하세요.
       </div>
     </section>
 
     <hr class="big-line">
     <center>
       <img class="footer-image" src="./runable-dad-frame-small.webp" alt="runable dad image">
-      <div class="footer-copy">&copy; 2026 <a href="https://runable.app" target="_blank" rel="noopener noreferrer">Runable.app</a> - Licensed under GPL v3</div>
+      <div class="footer-copy">&copy; <span id="copyright-year">2026</span> <a href="https://runable.app" target="_blank" rel="noopener noreferrer">Runable.app</a> - GPL v3 라이선스</div>
     </center>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.1/dist/embed.global.js" defer data-auto-init></script>
 </body>
 </html>

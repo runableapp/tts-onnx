@@ -118,7 +118,7 @@ tasks:
       vars: [VERSION]
     cmds:
       - mkdir -p dist
-      - tar czf dist/linux-tts-onnx_{{.VERSION}}_linux_amd64.tar.gz -C . bin config deploy scripts docs README.md MANUAL.md
+      - tar czf dist/linux-tts-onnx_{{.VERSION}}_linux_amd64.tar.gz -C . bin config deploy scripts test.sh README.md MANUAL.md
     status:
       - test -f dist/linux-tts-onnx_{{.VERSION}}_linux_amd64.tar.gz
 

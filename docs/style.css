@@ -236,6 +236,26 @@ code { font-family: "Courier New", Courier, monospace; }
   padding: 12px;
 }
 
+.download-cta {
+  text-align: center;
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid #1d4ed8;
+  background: #1d4ed8;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.download-btn:hover {
+  background: #1e40af;
+}
+
 .big-line {
   margin: 32px 0 10px;
   border: 0;
